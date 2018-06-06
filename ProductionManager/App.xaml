@@ -2,8 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProductionManager"
+             xmlns:view="clr-namespace:ProductionManager.View"
+             xmlns:viewmodel="clr-namespace:ProductionManager.ViewModel"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
+            <local:MainWindow />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ProductionPhaseViewModel}">
+            <view:ProductionPhases />
+        </DataTemplate>
     </Application.Resources>
 </Application>

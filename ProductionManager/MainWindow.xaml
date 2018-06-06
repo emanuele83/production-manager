@@ -3,18 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ProductionManager.MainWindow"
         Title="MainWindow" Height="350" Width="525" Icon="App.ico">
-    <Grid>
-        <DockPanel x:Name="MainPanel">
-            <syncfusion:MenuAdv x:Name="MainMenu" Height="30" VerticalAlignment="Top">
-                <syncfusion:MenuItemAdv Header="File">
-                    <MenuItem Header="Production Phases"/>
-                </syncfusion:MenuItemAdv>
-                <syncfusion:MenuItemAdv Header="View"/>
-                <syncfusion:MenuItemAdv/>
-                <syncfusion:MenuItemAdv/>
-                <syncfusion:MenuItemAdv/>
-                <syncfusion:MenuItemAdv/>
-            </syncfusion:MenuAdv>
-        </DockPanel>
-    </Grid>
+
+    <DockPanel x:Name="MainPanel">
+        <syncfusion:MenuAdv x:Name="MainMenu" Height="30" DockPanel.Dock="Top">
+            <syncfusion:MenuItemAdv Header="File">
+                <MenuItem Header="Production Phases" Command=""/>
+            </syncfusion:MenuItemAdv>
+            <syncfusion:MenuItemAdv Header="View"/>
+        </syncfusion:MenuAdv>
+
+        <ContentControl Content="{Binding CurrentViewModel}" />
+    </DockPanel>
 </Window>

@@ -12,11 +12,43 @@ namespace ProductionManager.Model
         public int Id { get; set; }
         public string Name { get; set; }
     }
-    
-    public class ProductionPhaseModel
+
+    public class ProductionPhaseModel : BasicModel
     {
         private LiteDatabase db;
         private LiteCollection<ProductionPhase> collection;
+        private ProductionPhase productionPhase;
+
+        public int Id
+        {
+            get
+            {
+                return productionPhase.Id;
+            }
+            set
+            {
+                if (value != productionPhase.Id)
+                {
+                    productionPhase.Id = value;
+                    OnPropertyChanged("Id");
+                }
+            }
+        }
+        public string Name
+        {
+            get
+            {
+                return productionPhase.Name;
+            }
+            set
+            {
+                if (value != productionPhase.Name)
+                {
+                    productionPhase.Name = value;
+                    OnPropertyChanged("Name");
+                }
+            }
+        }
 
         public ProductionPhaseModel(LiteDatabase liteDatabase)
         {

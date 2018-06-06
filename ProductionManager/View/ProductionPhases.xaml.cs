@@ -18,7 +18,7 @@ namespace ProductionManager.View
     /// <summary>
     /// Interaction logic for ProductionPhases.xaml
     /// </summary>
-    public partial class ProductionPhases : Page
+    public partial class ProductionPhases : UserControl
     {
         public ProductionPhases()
         {

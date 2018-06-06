@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.ViewModel
 {
-    public class ProductionPhaseViewModel : BasicViewModel
+    public class BasicViewModel : ObservableObject
     {
-
     }
 }

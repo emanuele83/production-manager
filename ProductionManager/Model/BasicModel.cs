@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductionManager.ViewModel
+namespace ProductionManager.Model
 {
-    public class ProductionPhaseViewModel : BasicViewModel
+    public class BasicModel : ObservableObject
     {
-
     }
 }
