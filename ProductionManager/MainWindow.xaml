@@ -7,11 +7,17 @@
     <DockPanel x:Name="MainPanel">
         <syncfusion:MenuAdv x:Name="MainMenu" Height="30" DockPanel.Dock="Top">
             <syncfusion:MenuItemAdv Header="File">
-                <MenuItem Header="Production Phases" Command=""/>
+                <MenuItem Header="Production Phases" 
+                          Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                          CommandParameter="ProductionPhaseViewModel"/>
+                <!--CommandParameter="{Binding }"/>-->
             </syncfusion:MenuItemAdv>
             <syncfusion:MenuItemAdv Header="View"/>
         </syncfusion:MenuAdv>
-
-        <ContentControl Content="{Binding CurrentViewModel}" />
+        <Button Content="test" 
+                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                
+                                Margin="2,5"/>
+        <ContentControl Content="{Binding CurrentPageViewModel}" />
     </DockPanel>
 </Window>

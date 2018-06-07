@@ -30,7 +30,7 @@ namespace ProductionManager.Model
                 if (value != productionPhase.Id)
                 {
                     productionPhase.Id = value;
-                    OnPropertyChanged("Id");
+                    RaisePropertyChanged("Id");
                 }
             }
         }
@@ -45,16 +45,18 @@ namespace ProductionManager.Model
                 if (value != productionPhase.Name)
                 {
                     productionPhase.Name = value;
-                    OnPropertyChanged("Name");
+                    RaisePropertyChanged("Name");
                 }
             }
         }
 
-        public ProductionPhaseModel(LiteDatabase liteDatabase)
+        public ProductionPhaseModel(LiteDatabase liteDatabase, int id)
         {
             this.db = liteDatabase ?? throw new ArgumentNullException(nameof(liteDatabase));
 
             collection = db.GetCollection<ProductionPhase>("phases");
+
+            productionPhase = GetProductionPhase(id);
         }
 
         public int AddProductionPhase(string name) => collection.Insert(new ProductionPhase() { Name = name });

@@ -1,3 +1,4 @@
+using ProductionManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,5 +14,12 @@ namespace ProductionManager
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWindow app = new MainWindow();
+            MainViewModel context = new MainViewModel();
+            app.DataContext = context;
+            app.Show();
+        }
     }
 }
