@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,11 @@ namespace ProductionManager.ViewModel
 
         #endregion
 
-        public MainViewModel()
+        public MainViewModel(LiteDatabase db)
         {
             // Add available pages
             PageViewModels.Add("HomeViewModel",new HomeViewModel());
-            PageViewModels.Add("ProductionPhaseViewModel",new ProductionPhaseViewModel());
+            PageViewModels.Add("ProductionPhaseViewModel",new ProductionPhaseViewModel(db));
 
             // Set starting page
             CurrentPageViewModel = PageViewModels["HomeViewModel"];
@@ -79,9 +80,10 @@ namespace ProductionManager.ViewModel
         private void ChangeViewModel(string viewModel)
         {
             //if (!PageViewModels.Contains(viewModel))
-              //  PageViewModels.Add(viewModel);
+            //  PageViewModels.Add(viewModel);
 
-            CurrentPageViewModel = PageViewModels[viewModel];
+            if (PageViewModels.ContainsKey(viewModel))
+                CurrentPageViewModel = PageViewModels[viewModel];
         }
 
         #endregion

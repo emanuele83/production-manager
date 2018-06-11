@@ -14,10 +14,6 @@
             </syncfusion:MenuItemAdv>
             <syncfusion:MenuItemAdv Header="View"/>
         </syncfusion:MenuAdv>
-        <Button Content="test" 
-                                Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
-                                
-                                Margin="2,5"/>
         <ContentControl Content="{Binding CurrentPageViewModel}" />
     </DockPanel>
 </Window>

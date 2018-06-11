@@ -7,29 +7,22 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
-    public class ProductionPhase
+    public class ProductionPhase : BasicModel
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class ProductionPhaseModel : BasicModel
-    {
-        private LiteDatabase db;
-        private LiteCollection<ProductionPhase> collection;
-        private ProductionPhase productionPhase;
+        private int _id;
+        private string _name;
 
         public int Id
         {
             get
             {
-                return productionPhase.Id;
+                return _id;
             }
             set
             {
-                if (value != productionPhase.Id)
+                if (value != _id)
                 {
-                    productionPhase.Id = value;
+                    _id = value;
                     RaisePropertyChanged("Id");
                 }
             }
@@ -38,29 +31,17 @@ namespace ProductionManager.Model
         {
             get
             {
-                return productionPhase.Name;
+                return _name;
             }
             set
             {
-                if (value != productionPhase.Name)
+                if (value != _name)
                 {
-                    productionPhase.Name = value;
+                    _name = value;
                     RaisePropertyChanged("Name");
                 }
             }
         }
-
-        public ProductionPhaseModel(LiteDatabase liteDatabase, int id)
-        {
-            this.db = liteDatabase ?? throw new ArgumentNullException(nameof(liteDatabase));
-
-            collection = db.GetCollection<ProductionPhase>("phases");
-
-            productionPhase = GetProductionPhase(id);
-        }
-
-        public int AddProductionPhase(string name) => collection.Insert(new ProductionPhase() { Name = name });
-        public ProductionPhase GetProductionPhase(int id) => collection.FindById(id);
-        public IEnumerable<ProductionPhase> ProductionPhases => collection.FindAll();
+        
     }
 }
