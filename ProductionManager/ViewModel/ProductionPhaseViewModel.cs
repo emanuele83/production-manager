@@ -13,24 +13,45 @@ namespace ProductionManager.ViewModel
     {
         private readonly LiteDatabase db;
         private LiteCollection<ProductionPhase> collection;
+        private string _phaseName;
+
+        public string PhaseName
+        {
+            get => _phaseName;
+            set
+            {
+                _phaseName = value;
+                RaisePropertyChanged("PhaseName");
+            }
+        }
+
+        public IEnumerable<ProductionPhase> ProductionPhases => collection.FindAll();
 
         public ProductionPhaseViewModel(LiteDatabase db)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
 
             collection = db.GetCollection<ProductionPhase>("phases");
+
+            _phaseName = string.Empty;
         }
 
-        public int AddProductionPhase(string name) => collection.Insert(new ProductionPhase() { Name = name });
+        public int AddProductionPhase()
+        {
+            int phaseId = collection.Insert(new ProductionPhase() { Name = PhaseName });
+            PhaseName = string.Empty;
+            RaisePropertyChanged("ProductionPhases");
+
+            return phaseId;
+        }
         public ProductionPhase GetProductionPhase(int id) => collection.FindById(id);
-        public IEnumerable<ProductionPhase> ProductionPhases => collection.FindAll();
 
         public ICommand AddPhaseCommand
         {
             get
             {
                 return new RelayCommand(
-                        p => AddProductionPhase(p.ToString()),
+                        p => AddProductionPhase(),
                         p => true);
             }
         }
