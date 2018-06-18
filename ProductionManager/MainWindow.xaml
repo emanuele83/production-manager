@@ -2,18 +2,20 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ProductionManager.MainWindow"
-        Title="MainWindow" Height="350" Width="525" Icon="App.ico">
+        Title="Production Manager" Icon="app.ico" WindowState="Maximized">
 
     <DockPanel x:Name="MainPanel">
         <syncfusion:MenuAdv x:Name="MainMenu" Height="30" DockPanel.Dock="Top">
+            
             <syncfusion:MenuItemAdv Header="File">
                 <MenuItem Header="Production Phases" 
                           Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
                           CommandParameter="ProductionPhaseViewModel"/>
-                <!--CommandParameter="{Binding }"/>-->
+                          <!--CommandParameter="{Binding }"/>-->
             </syncfusion:MenuItemAdv>
-            <syncfusion:MenuItemAdv Header="View"/>
+            
         </syncfusion:MenuAdv>
+        
         <ContentControl Content="{Binding CurrentPageViewModel}" />
     </DockPanel>
 </Window>

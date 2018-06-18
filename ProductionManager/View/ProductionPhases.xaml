@@ -3,21 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProductionManager.View"
-             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" x:Class="ProductionManager.View.ProductionPhases"
+             xmlns:local="clr-namespace:ProductionManager"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+             x:Class="ProductionManager.View.ProductionPhases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
     <DockPanel>
-        <StackPanel DockPanel.Dock="Bottom" Height="30" Orientation="Horizontal">
-            <TextBox Width="200" x:Name="phaseName"  Text="{Binding Path=PhaseName, UpdateSourceTrigger=PropertyChanged}" />
-            <Button x:Name="addPhaseButton" Content="Add" Width="50"
+        <StackPanel DockPanel.Dock="Top" Height="30" Orientation="Horizontal">
+            <TextBlock Text="Phase Name" VerticalAlignment="Center" Margin="10" />
+            <TextBox Width="200" x:Name="phaseName" VerticalAlignment="Center" 
+                     Text="{Binding Path=PhaseName, UpdateSourceTrigger=PropertyChanged}" />
+            <Button x:Name="addPhaseButton" Content="Add" Style="{DynamicResource AddButton}" 
                     Command="{Binding DataContext.AddPhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
         </StackPanel>
         
         <!--<DataGrid x:Name="ProductionPhasesGrid" AutoGenerateColumns="True" ItemsSource="{Binding ProductionPhases}" />-->
 
-        <syncfusion:SfDataGrid Name="ProductionPhasesGrid" ItemsSource="{Binding ProductionPhases}"/>
+        <syncfusion:SfDataGrid x:Name="ProductionPhasesGrid" ItemsSource="{Binding ProductionPhases}"
+                               AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto" >
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn MappingName="Name" AllowEditing="False" />
+                <syncfusion:GridTemplateColumn MappingName="" AllowEditing="False" AllowFiltering="False">
+                    <syncfusion:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{DynamicResource DeleteButton}"
+                                    Command="{Binding DataContext.DeletePhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding Id}"
+                                    Content="Delete"
+                                    syncfusion:VisualContainer.WantsMouseInput="True" />
+                        </DataTemplate>
+                    </syncfusion:GridTemplateColumn.CellTemplate>
+                </syncfusion:GridTemplateColumn>
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
 
     </DockPanel>
 </UserControl>

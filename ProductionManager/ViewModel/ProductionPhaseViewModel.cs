@@ -36,6 +36,7 @@ namespace ProductionManager.ViewModel
             _phaseName = string.Empty;
         }
 
+        #region Phase CRUD
         public int AddProductionPhase()
         {
             int phaseId = collection.Insert(new ProductionPhase() { Name = PhaseName });
@@ -44,8 +45,18 @@ namespace ProductionManager.ViewModel
 
             return phaseId;
         }
-        public ProductionPhase GetProductionPhase(int id) => collection.FindById(id);
+        public bool DeleteProductionPhase(int id)
+        {
+            bool result = collection.Delete(id);
+            if (result)
+                RaisePropertyChanged("ProductionPhases");
 
+            return result;
+        }
+        //public ProductionPhase GetProductionPhase(int id) => collection.FindById(id); 
+        #endregion
+
+        #region Phase Commands
         public ICommand AddPhaseCommand
         {
             get
@@ -55,5 +66,15 @@ namespace ProductionManager.ViewModel
                         p => true);
             }
         }
+        public ICommand DeletePhaseCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                        p => DeleteProductionPhase((int)p),
+                        p => true);
+            }
+        } 
+        #endregion
     }
 }

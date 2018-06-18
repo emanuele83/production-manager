@@ -2,12 +2,51 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProductionManager"
+             xmlns:resources="clr-namespace:ProductionManager.Properties"
              xmlns:view="clr-namespace:ProductionManager.View"
              xmlns:viewmodel="clr-namespace:ProductionManager.ViewModel" 
-             Startup="Application_Startup">
+             Startup="Application_Startup" >
     <Application.Resources>
+        <!--View-ViewModel Association-->
         <DataTemplate DataType="{x:Type viewmodel:ProductionPhaseViewModel}">
             <view:ProductionPhases />
         </DataTemplate>
+
+        <!--Resources Declaration-->
+        <ImageSource x:Key="Add">/Resources/Add.ico</ImageSource>
+        <ImageSource x:Key="Edit">/Resources/Edit.ico</ImageSource>
+        <ImageSource x:Key="Delete">/Resources/Delete.ico</ImageSource>
+
+        <!--Styles-->
+        <Style x:Key="AddButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="{StaticResource Add}" />
+                        </Grid>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True"/>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="True"/>
+                            <Trigger Property="IsPressed" Value="True"/>
+                            <Trigger Property="IsEnabled" Value="False"/>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DeleteButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="{StaticResource Delete}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Application.Resources>
 </Application>
