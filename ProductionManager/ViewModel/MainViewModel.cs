@@ -10,6 +10,8 @@ namespace ProductionManager.ViewModel
 {
     public class MainViewModel : BasicViewModel
     {
+        public override string Name => this.GetType().Name;
+
         #region Fields
 
         private ICommand _changePageCommand;
@@ -19,14 +21,14 @@ namespace ProductionManager.ViewModel
 
         #endregion
 
-        public MainViewModel(LiteDatabase db)
+        public MainViewModel()
         {
             // Add available pages
-            PageViewModels.Add("HomeViewModel",new HomeViewModel());
-            PageViewModels.Add("ProductionPhaseViewModel",new ProductionPhaseViewModel(db));
+            PageViewModels.Add(typeof(HomeViewModel).Name, new HomeViewModel());
+            //PageViewModels.Add(typeof(ProductionPhaseViewModel).Name, new ProductionPhaseViewModel());
 
             // Set starting page
-            CurrentPageViewModel = PageViewModels["HomeViewModel"];
+            CurrentPageViewModel = PageViewModels[typeof(HomeViewModel).Name];
         }
 
         #region Properties / Commands
@@ -72,15 +74,14 @@ namespace ProductionManager.ViewModel
                 }
             }
         }
-
         #endregion
 
         #region Methods
 
         private void ChangeViewModel(string viewModel)
         {
-            //if (!PageViewModels.Contains(viewModel))
-            //  PageViewModels.Add(viewModel);
+            if (!PageViewModels.ContainsKey(viewModel))
+                PageViewModels.Add(viewModel, (BasicViewModel)Activator.CreateInstance(Type.GetType(viewModel)));
 
             if (PageViewModels.ContainsKey(viewModel))
                 CurrentPageViewModel = PageViewModels[viewModel];

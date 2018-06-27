@@ -1,5 +1,6 @@
 ﻿using LiteDB;
 using ProductionManager.Model;
+using ProductionManager.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace ProductionManager.ViewModel
 {
     public class ProductionPhaseViewModel : BasicViewModel
     {
-        private readonly LiteDatabase db;
-        private LiteCollection<ProductionPhase> collection;
+        public override string Name => this.GetType().Name;
+
+        private IRepository<ProductionPhase> _repository;
         private string _phaseName;
 
         public string PhaseName
@@ -20,18 +22,19 @@ namespace ProductionManager.ViewModel
             get => _phaseName;
             set
             {
-                _phaseName = value;
-                RaisePropertyChanged("PhaseName");
+                if (!string.IsNullOrEmpty(value.Trim()) && value != _phaseName)
+                {
+                    _phaseName = value;
+                    RaisePropertyChanged("PhaseName");
+                }
             }
         }
 
-        public IEnumerable<ProductionPhase> ProductionPhases => collection.FindAll();
+        public IEnumerable<ProductionPhase> ProductionPhases => _repository.FindAll();
 
-        public ProductionPhaseViewModel(LiteDatabase db)
+        public ProductionPhaseViewModel()
         {
-            this.db = db ?? throw new ArgumentNullException(nameof(db));
-
-            collection = db.GetCollection<ProductionPhase>("phases");
+            _repository = new LiteDbRepository<ProductionPhase>();
 
             _phaseName = string.Empty;
         }
@@ -39,7 +42,7 @@ namespace ProductionManager.ViewModel
         #region Phase CRUD
         public int AddProductionPhase()
         {
-            int phaseId = collection.Insert(new ProductionPhase() { Name = PhaseName });
+            int phaseId = _repository.Insert(new ProductionPhase() { Name = PhaseName });
             PhaseName = string.Empty;
             RaisePropertyChanged("ProductionPhases");
 
@@ -47,13 +50,12 @@ namespace ProductionManager.ViewModel
         }
         public bool DeleteProductionPhase(int id)
         {
-            bool result = collection.Delete(id);
+            bool result = _repository.Delete(id);
             if (result)
                 RaisePropertyChanged("ProductionPhases");
 
             return result;
         }
-        //public ProductionPhase GetProductionPhase(int id) => collection.FindById(id); 
         #endregion
 
         #region Phase Commands
@@ -74,7 +76,7 @@ namespace ProductionManager.ViewModel
                         p => DeleteProductionPhase((int)p),
                         p => true);
             }
-        } 
+        }
         #endregion
     }
 }

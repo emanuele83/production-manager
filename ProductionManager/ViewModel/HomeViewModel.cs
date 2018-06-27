@@ -7,12 +7,6 @@ namespace ProductionManager.ViewModel
 {
     public class HomeViewModel : BasicViewModel
     {
-        public string Name
-        {
-            get
-            {
-                return "Home Page";
-            }
-        }
+        public override string Name => this.GetType().Name;
     }
 }

@@ -52,7 +52,6 @@ namespace ProductionManager
         /// <param name="propertyName">Property name to update. Is case-sensitive.</param>
         public virtual void RaisePropertyChanged(string propertyName)
         {
-            this.VerifyPropertyName(propertyName);
             OnPropertyChanged(propertyName);
         }
 

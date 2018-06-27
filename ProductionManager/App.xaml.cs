@@ -17,14 +17,10 @@ namespace ProductionManager
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // Open database (or create if doesn't exist)
-            using (LiteDatabase db = new LiteDatabase(@"ProductionManager.db"))
-            {
-                MainWindow app = new MainWindow();
-                MainViewModel context = new MainViewModel(db);
-                app.DataContext = context;
-                app.Show();
-            }
+            MainWindow app = new MainWindow();
+            MainViewModel context = new MainViewModel();
+            app.DataContext = context;
+            app.Show();
         }
     }
 }

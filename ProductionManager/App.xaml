@@ -18,6 +18,12 @@
         <ImageSource x:Key="Delete">/Resources/Delete.ico</ImageSource>
 
         <!--Styles-->
+        <!--Font-->
+        <!--<Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="22" />
+        </Style>-->
+        <!--Buttons-->
         <Style x:Key="AddButton" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>

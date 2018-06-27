@@ -9,24 +9,8 @@ namespace ProductionManager.Model
 {
     public class ProductionPhase : BasicModel
     {
-        private int _id;
         private string _name;
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (value != _id)
-                {
-                    _id = value;
-                    RaisePropertyChanged("Id");
-                }
-            }
-        }
         public string Name
         {
             get

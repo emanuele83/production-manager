@@ -31,7 +31,7 @@
                                     Command="{Binding DataContext.DeletePhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                     CommandParameter="{Binding Id}"
                                     Content="Delete"
-                                    syncfusion:VisualContainer.WantsMouseInput="True" />
+                                    syncfusion:FocusManagerHelper.FocusedElement="True" />
                         </DataTemplate>
                     </syncfusion:GridTemplateColumn.CellTemplate>
                 </syncfusion:GridTemplateColumn>
