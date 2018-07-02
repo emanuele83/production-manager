@@ -88,6 +88,9 @@
     <Compile Include="Repository\Database.cs" />
     <Compile Include="Repository\LiteDbRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Specification\BasicSpecification.cs" />
+    <Compile Include="Specification\ISpecification.cs" />
+    <Compile Include="Specification\ProductionPhaseSpecification.cs" />
     <Compile Include="ViewModel\BasicViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

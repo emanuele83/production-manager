@@ -1,6 +1,7 @@
 ﻿using LiteDB;
 using ProductionManager.Model;
 using ProductionManager.Repository;
+using ProductionManager.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,12 +31,17 @@ namespace ProductionManager.ViewModel
             }
         }
 
-        public IEnumerable<ProductionPhase> ProductionPhases => _repository.FindAll();
+        public IEnumerable<ProductionPhase> ProductionPhases => _repository.Find(ProductionPhaseSpecification.All);
 
         public ProductionPhaseViewModel()
         {
-            _repository = new LiteDbRepository<ProductionPhase>();
+            _repository = Database.CreateRepositoryForModel<ProductionPhase>();
 
+            Reset();
+        }
+
+        private void Reset()
+        {
             _phaseName = string.Empty;
         }
 
@@ -43,8 +49,9 @@ namespace ProductionManager.ViewModel
         public int AddProductionPhase()
         {
             int phaseId = _repository.Insert(new ProductionPhase() { Name = PhaseName });
-            PhaseName = string.Empty;
             RaisePropertyChanged("ProductionPhases");
+
+            Reset();
 
             return phaseId;
         }

@@ -1,53 +1,68 @@
 ﻿using LiteDB;
 using ProductionManager.Model;
-using System;
+using ProductionManager.Specification;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductionManager.Repository
 {
     public class LiteDbRepository<T> : IRepository<T> where T : BasicModel
     {
-        private readonly LiteRepository _db;
-
-        public LiteDbRepository()
-        {
-            this._db = Database.DbInstance;
-        }
-
         public virtual T FindById(int id)
         {
-            return _db.SingleById<T>(id);
+            return Database.LiteDbInstance.SingleById<T>(id);
         }
 
-        public virtual IEnumerable<T> FindAll()
+        private static LiteQueryable<T> CreateQuery(ISpecification<T> specification)
         {
-            return _db.Query<T>().ToEnumerable();
+            LiteQueryable<T> query = Database.LiteDbInstance.Query<T>();
+            // add where conditions
+            query.Where(specification.ToExpression());
+            // add includes, if any
+            foreach (var include in specification.Includes)
+            {
+                query.Include(include);
+            }
+
+            return query;
         }
 
-        //public virtual IEnumerable<T> List(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
-        //{
-        //    return _dbContext.Set<T>()
-        //           .Where(predicate)
-        //           .AsEnumerable();
-        //}
+        public int Count(ISpecification<T> specification)
+        {
+            LiteQueryable<T> query = CreateQuery(specification);
 
+            return query.Count();
+        }
+
+        public IEnumerable<T> Find(ISpecification<T> specification)
+        {
+            return Find(specification, 0, 0);
+        }
+
+        public IEnumerable<T> Find(ISpecification<T> specification, int page, int pageSize)
+        {
+            LiteQueryable<T> query = CreateQuery(specification);
+            if (pageSize > 0)
+            {
+                query.Skip(page * pageSize);
+                query.Limit(pageSize);
+            }
+
+            return query.ToEnumerable();
+        }
+        
         public int Insert(T model)
         {
-            return _db.Insert<T>(model);
+            return Database.LiteDbInstance.Insert<T>(model);
         }
 
         public bool Update(T model)
         {
-            return _db.Update<T>(model);
+            return Database.LiteDbInstance.Update<T>(model);
         }
 
         public bool Delete(int id)
         {
-            return _db.Delete<T>(id);
+            return Database.LiteDbInstance.Delete<T>(id);
         }
     }
 }
