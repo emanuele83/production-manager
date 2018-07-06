@@ -23,11 +23,8 @@ namespace ProductionManager.ViewModel
             get => _phaseName;
             set
             {
-                if (!string.IsNullOrEmpty(value.Trim()) && value != _phaseName)
-                {
-                    _phaseName = value;
-                    RaisePropertyChanged("PhaseName");
-                }
+                _phaseName = value;
+                RaisePropertyChanged("PhaseName");
             }
         }
 
@@ -42,16 +39,21 @@ namespace ProductionManager.ViewModel
 
         private void Reset()
         {
-            _phaseName = string.Empty;
+            PhaseName = string.Empty;
         }
 
         #region Phase CRUD
         public int AddProductionPhase()
         {
-            int phaseId = _repository.Insert(new ProductionPhase() { Name = PhaseName });
-            RaisePropertyChanged("ProductionPhases");
+            int phaseId = 0;
 
-            Reset();
+            if (!string.IsNullOrEmpty(PhaseName.Trim()))
+            {
+                phaseId = _repository.Insert(new ProductionPhase() { Name = PhaseName });
+                RaisePropertyChanged("ProductionPhases");
+
+                Reset();
+            }
 
             return phaseId;
         }

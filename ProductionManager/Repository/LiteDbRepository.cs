@@ -12,7 +12,7 @@ namespace ProductionManager.Repository
             return Database.LiteDbInstance.SingleById<T>(id);
         }
 
-        private static LiteQueryable<T> CreateQuery(ISpecification<T> specification)
+        private static LiteQueryable<T> CreateQuery(BasicSpecification<T> specification)
         {
             LiteQueryable<T> query = Database.LiteDbInstance.Query<T>();
             // add where conditions
@@ -26,19 +26,19 @@ namespace ProductionManager.Repository
             return query;
         }
 
-        public int Count(ISpecification<T> specification)
+        public int Count(BasicSpecification<T> specification)
         {
             LiteQueryable<T> query = CreateQuery(specification);
 
             return query.Count();
         }
 
-        public IEnumerable<T> Find(ISpecification<T> specification)
+        public IEnumerable<T> Find(BasicSpecification<T> specification)
         {
             return Find(specification, 0, 0);
         }
 
-        public IEnumerable<T> Find(ISpecification<T> specification, int page, int pageSize)
+        public IEnumerable<T> Find(BasicSpecification<T> specification, int page, int pageSize)
         {
             LiteQueryable<T> query = CreateQuery(specification);
             if (pageSize > 0)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ProductionManager.ViewModel
@@ -15,6 +16,7 @@ namespace ProductionManager.ViewModel
         #region Fields
 
         private ICommand _changePageCommand;
+        private ICommand _closeApplicationCommand;
 
         private BasicViewModel _currentPageViewModel;
         private Dictionary<string, BasicViewModel> _pageViewModels;
@@ -23,9 +25,8 @@ namespace ProductionManager.ViewModel
 
         public MainViewModel()
         {
-            // Add available pages
+            // Add starting page
             PageViewModels.Add(typeof(HomeViewModel).Name, new HomeViewModel());
-            //PageViewModels.Add(typeof(ProductionPhaseViewModel).Name, new ProductionPhaseViewModel());
 
             // Set starting page
             CurrentPageViewModel = PageViewModels[typeof(HomeViewModel).Name];
@@ -40,11 +41,26 @@ namespace ProductionManager.ViewModel
                 if (_changePageCommand == null)
                 {
                     _changePageCommand = new RelayCommand(
-                        p => ChangeViewModel(p.ToString()),
+                        p => ChangeViewModel((Type)p),
                         p => true);
                 }
 
                 return _changePageCommand;
+            }
+        }
+
+        public ICommand CloseApplicationCommand
+        {
+            get
+            {
+                if (_closeApplicationCommand == null)
+                {
+                    _closeApplicationCommand = new RelayCommand(
+                        p => Application.Current.Shutdown(),
+                        p => true);
+                }
+
+                return _closeApplicationCommand;
             }
         }
 
@@ -78,13 +94,14 @@ namespace ProductionManager.ViewModel
 
         #region Methods
 
-        private void ChangeViewModel(string viewModel)
+        private void ChangeViewModel(Type viewModel)
         {
-            if (!PageViewModels.ContainsKey(viewModel))
-                PageViewModels.Add(viewModel, (BasicViewModel)Activator.CreateInstance(Type.GetType(viewModel)));
+            if (!PageViewModels.ContainsKey(viewModel.Name))
+            {
+                PageViewModels.Add(viewModel.Name, (BasicViewModel)Activator.CreateInstance(viewModel));
+            }
 
-            if (PageViewModels.ContainsKey(viewModel))
-                CurrentPageViewModel = PageViewModels[viewModel];
+            CurrentPageViewModel = PageViewModels[viewModel.Name];
         }
 
         #endregion

@@ -1,17 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ProductionManager.ViewModel;
 using Syncfusion.SfSkinManager;
+using Syncfusion.Windows.Shared;
+using System;
+using System.Windows;
 
 namespace ProductionManager
 {
@@ -47,6 +38,26 @@ namespace ProductionManager
         {
             InitializeComponent();
 			this.Loaded += OnLoaded;
+
+            MainViewModel context = new MainViewModel();
+            DataContext = context;
+
+            // populate menu
+            MenuItemAdv FileMenu = new MenuItemAdv() { Header = "File" };
+            MainMenu.Items.Add(FileMenu);
+
+            MenuItemAdv ExitMenu = new MenuItemAdv() { Header = "Exit" };
+            ExitMenu.Command = context.CloseApplicationCommand;
+            FileMenu.Items.Add(ExitMenu);
+
+            MenuItemAdv ProductionMenu = new MenuItemAdv() { Header = "Production" };
+            MainMenu.Items.Add(ProductionMenu);
+
+            MenuItemAdv ProductionPhasesMenu = new MenuItemAdv() { Header = "Production Phases" };
+            ProductionPhasesMenu.Command = context.ChangePageCommand;
+            ProductionPhasesMenu.CommandParameter = typeof(ProductionPhaseViewModel);
+            ProductionMenu.Items.Add(ProductionPhasesMenu);
+
         }
 		/// <summary>
         /// Called when [loaded].

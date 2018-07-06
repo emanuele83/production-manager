@@ -11,9 +11,9 @@ namespace ProductionManager.Repository
     public interface IRepository<T> where T : BasicModel
     {
         T FindById(int id);
-        int Count(ISpecification<T> specification);
-        IEnumerable<T> Find(ISpecification<T> specification);
-        IEnumerable<T> Find(ISpecification<T> specification, int page, int pageSize);
+        int Count(BasicSpecification<T> specification);
+        IEnumerable<T> Find(BasicSpecification<T> specification);
+        IEnumerable<T> Find(BasicSpecification<T> specification, int page, int pageSize);
         int Insert(T model);
         bool Update(T model);
         bool Delete(int id);

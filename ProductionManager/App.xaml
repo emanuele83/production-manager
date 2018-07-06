@@ -5,7 +5,8 @@
              xmlns:resources="clr-namespace:ProductionManager.Properties"
              xmlns:view="clr-namespace:ProductionManager.View"
              xmlns:viewmodel="clr-namespace:ProductionManager.ViewModel" 
-             Startup="Application_Startup" >
+             StartupUri="MainWindow.xaml">
+    
     <Application.Resources>
         <!--View-ViewModel Association-->
         <DataTemplate DataType="{x:Type viewmodel:ProductionPhaseViewModel}">

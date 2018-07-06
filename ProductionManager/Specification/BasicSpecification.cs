@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.Specification
 {
-    public abstract class BasicSpecification<T> : ISpecification<T>
+    public abstract class BasicSpecification<T>
     {
         private List<Expression<Func<T, object>>> _includes;
 
