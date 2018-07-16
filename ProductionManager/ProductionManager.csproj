@@ -89,16 +89,19 @@
     <Compile Include="Model\BasicModel.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductCategory.cs" />
+    <Compile Include="Model\ProductCategoryPhase.cs" />
     <Compile Include="Repository\Database.cs" />
     <Compile Include="Repository\LiteDbRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Specification\BasicSpecification.cs" />
+    <Compile Include="Specification\ProductCategoryPhaseSpecification.cs" />
     <Compile Include="Specification\ProductCategorySpecification.cs" />
     <Compile Include="Specification\ProductionPhaseSpecification.cs" />
     <Compile Include="Specification\ProductSpecification.cs" />
     <Compile Include="ViewModel\BasicViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ProductCategoryPhaseViewModel.cs" />
     <Compile Include="ViewModel\ProductCategoryViewModel.cs" />
     <Compile Include="ViewModel\ProductionPhaseViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
@@ -107,6 +110,9 @@
     </Compile>
     <Compile Include="View\ProductCategories.xaml.cs">
       <DependentUpon>ProductCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductCategoryPhases.xaml.cs">
+      <DependentUpon>ProductCategoryPhases.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductionPhases.xaml.cs">
       <DependentUpon>ProductionPhases.xaml</DependentUpon>
@@ -131,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProductCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductCategoryPhases.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

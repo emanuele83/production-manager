@@ -26,6 +26,18 @@ namespace ProductionManager.Model
                 }
             }
         }
-        
+
+        public override bool IsValid()
+        {
+            return !string.IsNullOrEmpty(Name.Trim())
+                    ;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+
+            Name = string.Empty;
+        }
     }
 }

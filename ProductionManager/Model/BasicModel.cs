@@ -25,5 +25,12 @@ namespace ProductionManager.Model
                 }
             }
         }
+
+        public virtual void Reset()
+        {
+            Id = 0;
+        }
+
+        public abstract bool IsValid();
     }
 }

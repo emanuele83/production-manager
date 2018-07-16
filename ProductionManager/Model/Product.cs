@@ -39,5 +39,20 @@ namespace ProductionManager.Model
                 RaisePropertyChanged("Category");
             }
         }
+
+        public override bool IsValid()
+        {
+            return  !string.IsNullOrEmpty(Name.Trim())
+                    && Category != null
+                    ;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+
+            Name = string.Empty;
+            Category = null;
+        }
     }
 }

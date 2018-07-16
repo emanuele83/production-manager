@@ -16,27 +16,16 @@ namespace ProductionManager.ViewModel
 
         private IRepository<Product> _repository;
         private IRepository<ProductCategory> _categoryRepository;
+        
+        private Product _newProduct;
 
-        private string _productName;
-        private ProductCategory _productCategory;
-
-        public string ProductName
+        public Product NewProduct
         {
-            get => _productName;
+            get => _newProduct;
             set
             {
-                _productName = value;
-                RaisePropertyChanged("ProductName");
-            }
-        }
-
-        public ProductCategory ProductCategory
-        {
-            get => _productCategory;
-            set
-            {
-                _productCategory = value;
-                RaisePropertyChanged("ProductCategory");
+                _newProduct = value;
+                RaisePropertyChanged("NewProduct");
             }
         }
 
@@ -48,13 +37,14 @@ namespace ProductionManager.ViewModel
             _repository = Database.CreateRepositoryForModel<Product>();
             _categoryRepository = Database.CreateRepositoryForModel<ProductCategory>();
 
+            NewProduct = new Product();
+
             Reset();
         }
 
         private void Reset()
         {
-            ProductName = string.Empty;
-            ProductCategory = null;
+            NewProduct.Reset();
         }
 
         #region Product CRUD
@@ -62,9 +52,9 @@ namespace ProductionManager.ViewModel
         {
             int productId = 0;
 
-            if (!string.IsNullOrEmpty(ProductName.Trim()) && ProductCategory != null)
+            if (NewProduct.IsValid())
             {
-                productId = _repository.Insert(new Product() { Name = ProductName, Category = ProductCategory });
+                productId = _repository.Insert(NewProduct);
                 RaisePropertyChanged("Products");
 
                 Reset();

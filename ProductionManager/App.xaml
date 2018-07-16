@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type viewmodel:ProductViewModel}">
             <view:Products />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ProductCategoryPhaseViewModel}">
+            <view:ProductCategoryPhases />
+        </DataTemplate>
 
         <!--Resources Declaration-->
         <ImageSource x:Key="Add">/Resources/Add.ico</ImageSource>

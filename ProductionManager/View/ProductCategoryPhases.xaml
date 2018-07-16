@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="ProductionManager.View.ProductCategoryPhases"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductionManager.View"
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Product Category" VerticalAlignment="Center" Margin="10" Width="100" />
+                <ComboBox Width="200" x:Name="category" VerticalAlignment="Center" ItemsSource="{Binding Categories}"
+                          SelectedItem="{Binding Path=NewCategoryPhase.Category, UpdateSourceTrigger=PropertyChanged}" 
+                          DisplayMemberPath="Name">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Production Phase" VerticalAlignment="Center" Margin="10" Width="100" />
+                <ComboBox Width="200" x:Name="phase" VerticalAlignment="Center" ItemsSource="{Binding Phases}"
+                          SelectedItem="{Binding Path=NewCategoryPhase.Phase, UpdateSourceTrigger=PropertyChanged}" 
+                          DisplayMemberPath="Name">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Machine Hours" VerticalAlignment="Center" Margin="10" Width="100" />
+                <TextBox Width="200" x:Name="machineHours" VerticalAlignment="Center" 
+                         Text="{Binding Path=NewCategoryPhase.MachineHours, UpdateSourceTrigger=PropertyChanged}" >
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Worker Hours" VerticalAlignment="Center" Margin="10" Width="100" />
+                <TextBox Width="200" x:Name="workerHours" VerticalAlignment="Center" 
+                         Text="{Binding Path=NewCategoryPhase.WorkerHours, UpdateSourceTrigger=PropertyChanged}" >
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Worker Number" VerticalAlignment="Center" Margin="10" Width="100" />
+                <TextBox Width="200" x:Name="workerNumber" VerticalAlignment="Center" 
+                         Text="{Binding Path=NewCategoryPhase.WorkerNumber, UpdateSourceTrigger=PropertyChanged}" >
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="addProductButton" Content="Add" Style="{DynamicResource AddButton}" 
+                        Command="{Binding DataContext.AddProductCategoryPhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            </StackPanel>
+        </StackPanel>
+
+        <syncfusion:SfDataGrid x:Name="ProductCategoryPhasesGrid" ItemsSource="{Binding ProductCategoryPhases}"
+                               AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto" ShowColumnWhenGrouped="False"
+                               AutoExpandGroups="True" >
+            <syncfusion:SfDataGrid.GroupColumnDescriptions>
+                <syncfusion:GroupColumnDescription ColumnName="Category.Name" />
+            </syncfusion:SfDataGrid.GroupColumnDescriptions>
+            <syncfusion:SfDataGrid.Columns>
+                <syncfusion:GridTextColumn HeaderText="Category" MappingName="Category.Name" AllowEditing="False" />
+                <syncfusion:GridTextColumn HeaderText="Phase" MappingName="Phase.Name" AllowEditing="False" />
+
+                <syncfusion:GridTextColumn HeaderText="Machine Hours" MappingName="MachineHours" AllowEditing="False" />
+                <syncfusion:GridTextColumn HeaderText="Worker Hours" MappingName="WorkerHours" AllowEditing="False" />
+                <syncfusion:GridTextColumn HeaderText="Worker Number" MappingName="WorkerNumber" AllowEditing="False" />
+                
+                <syncfusion:GridTemplateColumn MappingName="" AllowEditing="False" AllowFiltering="False">
+                    <syncfusion:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Style="{DynamicResource DeleteButton}"
+                                    Command="{Binding DataContext.DeleteProductCategoryPhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding Id}"
+                                    Content="Delete"
+                                    syncfusion:FocusManagerHelper.FocusedElement="True" />
+                        </DataTemplate>
+                    </syncfusion:GridTemplateColumn.CellTemplate>
+                </syncfusion:GridTemplateColumn>
+            </syncfusion:SfDataGrid.Columns>
+        </syncfusion:SfDataGrid>
+
+    </DockPanel>
+</UserControl>

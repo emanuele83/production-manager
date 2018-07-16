@@ -12,13 +12,13 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Product Name" VerticalAlignment="Center" Margin="10" Width="100" />
                 <TextBox Width="200" x:Name="productName" VerticalAlignment="Center" 
-                         Text="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" >
+                         Text="{Binding Path=NewProduct.Name, UpdateSourceTrigger=PropertyChanged}" >
                 </TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Category" VerticalAlignment="Center" Margin="10" Width="100" />
                 <ComboBox Width="200" x:Name="category" VerticalAlignment="Center" ItemsSource="{Binding Categories}"
-                          SelectedItem="{Binding Path=ProductCategory, UpdateSourceTrigger=PropertyChanged}" 
+                          SelectedItem="{Binding Path=NewProduct.Category, UpdateSourceTrigger=PropertyChanged}" 
                           DisplayMemberPath="Name">
                 </ComboBox>
             </StackPanel>
