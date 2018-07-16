@@ -1,28 +1,26 @@
-﻿<UserControl
+﻿<UserControl x:Class="ProductionManager.View.ProductCategories"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProductionManager"
+             xmlns:local="clr-namespace:ProductionManager.View"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
-             x:Class="ProductionManager.View.ProductionPhases"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
     <DockPanel>
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock Text="Phase Name" VerticalAlignment="Center" Margin="10" />
-            <TextBox Width="200" x:Name="phaseName" VerticalAlignment="Center" 
-                     Text="{Binding Path=PhaseName, UpdateSourceTrigger=PropertyChanged}" >
+            <TextBlock Text="Product Category Name" VerticalAlignment="Center" Margin="10" />
+            <TextBox Width="200" x:Name="productCategoryName" VerticalAlignment="Center" 
+                     Text="{Binding Path=ProductCategoryName, UpdateSourceTrigger=PropertyChanged}" >
                 <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding DataContext.AddPhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Key="Enter" />
+                    <KeyBinding Command="{Binding DataContext.AddProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Key="Enter" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Button x:Name="addPhaseButton" Content="Add" Style="{DynamicResource AddButton}" 
-                    Command="{Binding DataContext.AddPhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Button x:Name="addProductCategoryButton" Content="Add" Style="{DynamicResource AddButton}" 
+                    Command="{Binding DataContext.AddProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
         </StackPanel>
 
-        <syncfusion:SfDataGrid x:Name="ProductionPhasesGrid" ItemsSource="{Binding ProductionPhases}"
+        <syncfusion:SfDataGrid x:Name="ProductCategoriesGrid" ItemsSource="{Binding ProductCategories}"
                                AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto" >
             <syncfusion:SfDataGrid.Columns>
                 <syncfusion:GridTextColumn MappingName="Name" AllowEditing="False" />
@@ -30,7 +28,7 @@
                     <syncfusion:GridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Style="{DynamicResource DeleteButton}"
-                                    Command="{Binding DataContext.DeletePhaseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    Command="{Binding DataContext.DeleteProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                     CommandParameter="{Binding Id}"
                                     Content="Delete"
                                     syncfusion:FocusManagerHelper.FocusedElement="True" />

@@ -57,6 +57,14 @@ namespace ProductionManager
             ProductionPhasesMenu.Command = context.ChangePageCommand;
             ProductionPhasesMenu.CommandParameter = typeof(ProductionPhaseViewModel);
             ProductionMenu.Items.Add(ProductionPhasesMenu);
+            MenuItemAdv ProductCategoriesMenu = new MenuItemAdv() { Header = "Product Categories" };
+            ProductCategoriesMenu.Command = context.ChangePageCommand;
+            ProductCategoriesMenu.CommandParameter = typeof(ProductCategoryViewModel);
+            ProductionMenu.Items.Add(ProductCategoriesMenu);
+            MenuItemAdv ProductsMenu = new MenuItemAdv() { Header = "Products" };
+            ProductsMenu.Command = context.ChangePageCommand;
+            ProductsMenu.CommandParameter = typeof(ProductViewModel);
+            ProductionMenu.Items.Add(ProductsMenu);
 
         }
 		/// <summary>

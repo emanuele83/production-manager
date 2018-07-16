@@ -13,7 +13,7 @@ namespace ProductionManager.Specification
     {
         private List<Expression<Func<T, object>>> _includes;
 
-        public static readonly BasicSpecification<T> All = new GeneralSpecification<T>();
+        public static readonly BasicSpecification<T> All = new FindAllSpecification<T>();
         public ReadOnlyCollection<Expression<Func<T, object>>> Includes
         {
             get
@@ -22,7 +22,11 @@ namespace ProductionManager.Specification
             }
         }
 
-        public abstract Expression<Func<T, bool>> ToExpression();
+        //public abstract Expression<Func<T, bool>> ToExpression();
+        public virtual Expression<Func<T, bool>> ToExpression()
+        {
+            return x => true;
+        }
 
         public BasicSpecification()
         {
@@ -42,10 +46,8 @@ namespace ProductionManager.Specification
 
         public BasicSpecification<T> And(BasicSpecification<T> specification)
         {
-            if (this == All)
-                return specification;
-            if (specification == All)
-                return this;
+            if (this == All || specification == All)
+                return All;
 
             return new AndSpecification<T>(this, specification);
         }
@@ -129,7 +131,7 @@ namespace ProductionManager.Specification
         }
     }
     
-    internal sealed class GeneralSpecification<T> : BasicSpecification<T>
+    internal sealed class FindAllSpecification<T> : BasicSpecification<T>
     {
         public override Expression<Func<T, bool>> ToExpression()
         {

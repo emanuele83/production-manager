@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.Specification
 {
-    public class ProductionPhaseSpecification : BasicSpecification<ProductionPhase>
+    public class ProductCategorySpecification : BasicSpecification<ProductCategory>
     {
     }
 }

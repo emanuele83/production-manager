@@ -10,7 +10,7 @@ namespace ProductionManager.Repository
 
         static Database()
         {
-            switch (ConfigurationManager.AppSettings["DB"])
+            switch (ConfigurationManager.AppSettings["CURRENT_DB_SOURCE"])
             {
                 case "LITEDB":
                     LiteDbInstance = new LiteRepository(ConfigurationManager.ConnectionStrings["LITEDB"].ConnectionString);
@@ -23,7 +23,7 @@ namespace ProductionManager.Repository
 
         public static IRepository<T> CreateRepositoryForModel<T>() where T : BasicModel
         {
-            switch (ConfigurationManager.AppSettings["DB"])
+            switch (ConfigurationManager.AppSettings["CURRENT_DB_SOURCE"])
             {
                 case "LITEDB":
                     return new LiteDbRepository<T>();
