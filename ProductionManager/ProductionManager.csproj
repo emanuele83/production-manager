@@ -86,19 +86,19 @@
     </ApplicationDefinition>
     <Compile Include="Lib\ObservableObject.cs" />
     <Compile Include="Lib\RelayCommand.cs" />
-    <Compile Include="Model\BasicModel.cs" />
+    <Compile Include="Lib\BasicModel.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductCategory.cs" />
     <Compile Include="Model\ProductCategoryPhase.cs" />
     <Compile Include="Repository\Database.cs" />
     <Compile Include="Repository\LiteDbRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
-    <Compile Include="Specification\BasicSpecification.cs" />
+    <Compile Include="Lib\BasicSpecification.cs" />
     <Compile Include="Specification\ProductCategoryPhaseSpecification.cs" />
     <Compile Include="Specification\ProductCategorySpecification.cs" />
     <Compile Include="Specification\ProductionPhaseSpecification.cs" />
     <Compile Include="Specification\ProductSpecification.cs" />
-    <Compile Include="ViewModel\BasicViewModel.cs" />
+    <Compile Include="Lib\BasicViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ProductCategoryPhaseViewModel.cs" />
