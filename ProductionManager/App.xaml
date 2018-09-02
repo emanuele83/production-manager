@@ -5,9 +5,11 @@
              xmlns:resources="clr-namespace:ProductionManager.Properties"
              xmlns:view="clr-namespace:ProductionManager.View"
              xmlns:viewmodel="clr-namespace:ProductionManager.ViewModel" 
+             xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
              StartupUri="MainWindow.xaml">
     
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="visibilityConverter" />
         <!--View-ViewModel Association-->
         <DataTemplate DataType="{x:Type viewmodel:HomeViewModel}">
             <view:Home />
@@ -24,25 +26,63 @@
         <DataTemplate DataType="{x:Type viewmodel:ProductCategoryPhaseViewModel}">
             <view:ProductCategoryPhases />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:CustomerViewModel}">
+            <view:Customers />
+        </DataTemplate>
 
         <!--Resources Declaration-->
         <ImageSource x:Key="Add">/Resources/Add.ico</ImageSource>
         <ImageSource x:Key="Edit">/Resources/Edit.ico</ImageSource>
         <ImageSource x:Key="Delete">/Resources/Delete.ico</ImageSource>
+        <ImageSource x:Key="Close">/Resources/Close.ico</ImageSource>
+        <ImageSource x:Key="Save">/Resources/Save.ico</ImageSource>
 
         <!--Styles-->
+        
+        <!--Grids-->
+        <Style TargetType="syncfusion:VirtualizingCellsControl" x:Key="alternatingRowStyle">
+            <Setter Property="Background" Value="Gray"/>
+        </Style>
+
         <!--Font-->
-        <!--<Style TargetType="{x:Type Window}">
+        <!--<Style TargetType="{x:Type Window}" x:Key="WindowStyle">
             <Setter Property="FontFamily" Value="Comic Sans MS" />
-            <Setter Property="FontSize" Value="22" />
+            <Setter Property="FontSize" Value="14" />
         </Style>-->
+        <Style TargetType="syncfusion:GridCell" x:Key="customCellStyle">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <!--<Style TargetType="TextBox" x:Key="MenuItemStyle">
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>-->
+
+        <!--form-->
+        <Style TargetType="{x:Type Label}" x:Key="FormLabel">
+            <Setter Property="Margin" Value="3" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+        </Style>
+        <!--<Style TargetType="{x:Type TextBox}" x:Key="FormTextBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type ComboBox}" x:Key="FormComboBox">
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Width" Value="200" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>-->
+
         <!--Buttons-->
         <Style x:Key="AddButton" TargetType="{x:Type Button}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image Source="{StaticResource Add}" Height="30" />
+                            <Image Source="{StaticResource Add}" Height="30" Margin="3" />
                         </Grid>
                         <!--<ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True"/>
@@ -60,7 +100,40 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Image Source="{StaticResource Delete}" Height="30" />
+                            <Image Source="{StaticResource Delete}" Height="30" Margin="3" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EditButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="{StaticResource Edit}" Height="30" Margin="3" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="{StaticResource Close}" Height="30" Margin="3" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SaveButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Image Source="{StaticResource Save}" Height="30" Margin="3" />
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

@@ -5,37 +5,37 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProductionManager.View"
              xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
+             xmlns:controls="clr-namespace:ProductionManager.View.Controls"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock Text="Product Category Name" VerticalAlignment="Center" Margin="10" />
-            <TextBox Width="200" x:Name="productCategoryName" VerticalAlignment="Center" 
-                     Text="{Binding Path=ProductCategoryName, UpdateSourceTrigger=PropertyChanged}" >
-                <TextBox.InputBindings>
-                    <KeyBinding Command="{Binding DataContext.AddProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Key="Enter" />
-                </TextBox.InputBindings>
-            </TextBox>
-            <Button x:Name="addProductCategoryButton" Content="Add" Style="{DynamicResource AddButton}" 
-                    Command="{Binding DataContext.AddProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Width="500">
+            <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
+                <Label Content="Product Category Name" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
+                <TextBox x:Name="productCategoryName"  Margin="5" Width="Auto" VerticalAlignment="Center" 
+                    Text="{Binding Path=CurrentRecord.Name, UpdateSourceTrigger=PropertyChanged}" >
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Key="Enter" />
+                    </TextBox.InputBindings>
+                </TextBox>
+            </DockPanel>
+            <controls:CatalogEditButtons HorizontalAlignment="Right" />
         </StackPanel>
 
-        <syncfusion:SfDataGrid x:Name="ProductCategoriesGrid" ItemsSource="{Binding ProductCategories}"
-                               AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto" >
+        <syncfusion:SfDataGrid x:Name="recordGrid" ItemsSource="{Binding AllRecords}"
+                               AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto"
+                               CellStyle="{StaticResource customCellStyle}"
+                               AlternatingRowStyle="{StaticResource alternatingRowStyle}" >
             <syncfusion:SfDataGrid.Columns>
                 <syncfusion:GridTextColumn MappingName="Name" AllowEditing="False" />
-                <syncfusion:GridTemplateColumn MappingName="" AllowEditing="False" AllowFiltering="False">
-                    <syncfusion:GridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Style="{DynamicResource DeleteButton}"
-                                    Command="{Binding DataContext.DeleteProductCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                                    CommandParameter="{Binding Id}"
-                                    Content="Delete"
-                                    syncfusion:FocusManagerHelper.FocusedElement="True" />
-                        </DataTemplate>
-                    </syncfusion:GridTemplateColumn.CellTemplate>
-                </syncfusion:GridTemplateColumn>
             </syncfusion:SfDataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding PopulateFormCommand}" 
+                                           CommandParameter="{Binding Path=SelectedItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=syncfusion:SfDataGrid}}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </syncfusion:SfDataGrid>
 
     </DockPanel>

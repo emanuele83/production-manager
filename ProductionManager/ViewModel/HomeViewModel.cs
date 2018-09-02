@@ -7,6 +7,5 @@ namespace ProductionManager.ViewModel
 {
     public class HomeViewModel : BasicViewModel
     {
-        public override string Name => this.GetType().Name;
     }
 }

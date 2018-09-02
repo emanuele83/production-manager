@@ -43,13 +43,16 @@ namespace ProductionManager
             DataContext = context;
 
             // populate menu
+            #region File menu
             MenuItemAdv FileMenu = new MenuItemAdv() { Header = "File" };
-            MainMenu.Items.Add(FileMenu);
+            MainMenu.Items.Add(FileMenu); 
 
             MenuItemAdv ExitMenu = new MenuItemAdv() { Header = "Exit" };
             ExitMenu.Command = context.CloseApplicationCommand;
             FileMenu.Items.Add(ExitMenu);
+            #endregion
 
+            #region Production menu
             MenuItemAdv ProductionMenu = new MenuItemAdv() { Header = "Production" };
             MainMenu.Items.Add(ProductionMenu);
 
@@ -72,7 +75,17 @@ namespace ProductionManager
             ProductsMenu.Command = context.ChangePageCommand;
             ProductsMenu.CommandParameter = typeof(ProductViewModel);
             ProductionMenu.Items.Add(ProductsMenu);
+            #endregion
 
+            #region Orders menu
+            MenuItemAdv OrdersMenu = new MenuItemAdv() { Header = "Orders" };
+            MainMenu.Items.Add(OrdersMenu);
+
+            MenuItemAdv CustomersMenu = new MenuItemAdv() { Header = "Customers" };
+            CustomersMenu.Command = context.ChangePageCommand;
+            CustomersMenu.CommandParameter = typeof(CustomerViewModel);
+            OrdersMenu.Items.Add(CustomersMenu);
+            #endregion
         }
 		/// <summary>
         /// Called when [loaded].

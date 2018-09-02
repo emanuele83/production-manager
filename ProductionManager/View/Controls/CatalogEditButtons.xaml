@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ProductionManager.View.Controls.CatalogEditButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductionManager.View.Controls"
+             mc:Ignorable="d">
+    <Grid Margin="3">
+        <StackPanel Orientation="Horizontal" Visibility="{Binding ShowMode, Converter={StaticResource visibilityConverter}}">
+            <Button x:Name="addButton" Content="Add" Style="{DynamicResource AddButton}" 
+                    Command="{Binding DataContext.AddCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Button x:Name="editButton" Content="Edit" Style="{DynamicResource EditButton}" 
+                    Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Button x:Name="deleteButton" Content="Delete" Style="{DynamicResource DeleteButton}" 
+                    Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Visibility="{Binding EditMode, Converter={StaticResource visibilityConverter}}">
+            <Button x:Name="saveButton" Content="Save" Style="{DynamicResource SaveButton}" 
+                    Command="{Binding DataContext.SaveCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+            <Button x:Name="closeButton" Content="Close" Style="{DynamicResource CloseButton}" 
+                    Command="{Binding DataContext.CloseCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -11,8 +11,6 @@ namespace ProductionManager.ViewModel
 {
     public class MainViewModel : BasicViewModel
     {
-        public override string Name => this.GetType().Name;
-
         #region Fields
 
         private ICommand _changePageCommand;
