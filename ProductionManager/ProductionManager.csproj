@@ -89,6 +89,7 @@
     <Compile Include="Lib\RelayCommand.cs" />
     <Compile Include="Lib\BasicModel.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\ProductCategory.cs" />
     <Compile Include="Model\ProductCategoryPhase.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Lib\BasicSpecification.cs" />
     <Compile Include="Specification\CustomerSpecification.cs" />
+    <Compile Include="Specification\OrderSpecification.cs" />
     <Compile Include="Specification\ProductCategoryPhaseSpecification.cs" />
     <Compile Include="Specification\ProductCategorySpecification.cs" />
     <Compile Include="Specification\ProductionPhaseSpecification.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
     <Compile Include="ViewModel\ProductCategoryPhaseViewModel.cs" />
     <Compile Include="ViewModel\ProductCategoryViewModel.cs" />
     <Compile Include="ViewModel\ProductionPhaseViewModel.cs" />
@@ -117,6 +120,9 @@
     </Compile>
     <Compile Include="View\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Orders.xaml.cs">
+      <DependentUpon>Orders.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductCategories.xaml.cs">
       <DependentUpon>ProductCategories.xaml</DependentUpon>
@@ -151,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Orders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

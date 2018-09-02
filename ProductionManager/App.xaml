@@ -29,6 +29,9 @@
         <DataTemplate DataType="{x:Type viewmodel:CustomerViewModel}">
             <view:Customers />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:OrderViewModel}">
+            <view:Orders />
+        </DataTemplate>
 
         <!--Resources Declaration-->
         <ImageSource x:Key="Add">/Resources/Add.ico</ImageSource>

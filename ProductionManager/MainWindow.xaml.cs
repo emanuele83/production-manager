@@ -37,7 +37,9 @@ namespace ProductionManager
         public MainWindow()
         {
             InitializeComponent();
-			this.Loaded += OnLoaded;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("it-IT");
+
+            this.Loaded += OnLoaded;
 
             MainViewModel context = new MainViewModel();
             DataContext = context;
@@ -85,6 +87,11 @@ namespace ProductionManager
             CustomersMenu.Command = context.ChangePageCommand;
             CustomersMenu.CommandParameter = typeof(CustomerViewModel);
             OrdersMenu.Items.Add(CustomersMenu);
+
+            MenuItemAdv OrdersListMenu = new MenuItemAdv() { Header = "Orders List" };
+            OrdersListMenu.Command = context.ChangePageCommand;
+            OrdersListMenu.CommandParameter = typeof(OrderViewModel);
+            OrdersMenu.Items.Add(OrdersListMenu);
             #endregion
         }
 		/// <summary>
