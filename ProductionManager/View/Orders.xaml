@@ -10,14 +10,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Width="500">
-            <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
-                <Label Content="Incoming Date" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
-                <!--<syncfusion:CalendarEdit Name="calendarEdit" Date="{Binding Path=CurrentRecord.IncomingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
-                <DatePicker x:Name="incomingDate"  Margin="5" Width="Auto" VerticalAlignment="Center" 
-                    SelectedDate="{Binding Path=CurrentRecord.IncomingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
-                </DatePicker>
-            </DockPanel>
+        <StackPanel DockPanel.Dock="Right" Orientation="Vertical" Width="550">
             <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
                 <Label Content="Customer" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
                 <ComboBox x:Name="customer" ItemsSource="{Binding Customers}" 
@@ -25,6 +18,20 @@
                         SelectedItem="{Binding Path=CurrentRecord.Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         DisplayMemberPath="Name">
                 </ComboBox>
+            </DockPanel>
+            <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
+                <Label Content="Order Date" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
+                <!--<syncfusion:CalendarEdit Name="orderDate" Date="{Binding Path=CurrentRecord.OrderDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <DatePicker x:Name="orderDate"  Margin="5" Width="Auto" VerticalAlignment="Center" 
+                    SelectedDate="{Binding Path=CurrentRecord.OrderDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                </DatePicker>
+            </DockPanel>
+            <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
+                <Label Content="Delivery Request Date" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
+                <!--<syncfusion:CalendarEdit Name="orderDate" Date="{Binding Path=CurrentRecord.OrderDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
+                <DatePicker x:Name="orderDeliveryRequestDate"  Margin="5" Width="Auto" VerticalAlignment="Center" 
+                    SelectedDate="{Binding Path=CurrentRecord.OrderDeliveryRequestDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                </DatePicker>
             </DockPanel>
             <DockPanel LastChildFill="True" IsEnabled="{Binding EditMode}">
                 <Label Content="External Reference" DockPanel.Dock="Left" Style="{StaticResource FormLabel}" />
@@ -35,17 +42,46 @@
                     </TextBox.InputBindings>
                 </TextBox>
             </DockPanel>
+            <syncfusion:SfDataGrid x:Name="orderProductsGrid" ItemsSource="{Binding CurrentRecord.OrderProducts}"
+                               AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto"
+                               CellStyle="{StaticResource customCellStyle}"
+                               AlternatingRowStyle="{StaticResource alternatingRowStyle}" AllowEditing="True" >
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridComboBoxColumn HeaderText="Product" MappingName="ProductName" />
+                    <syncfusion:GridTextColumn MappingName="Quantity" />
+                    <syncfusion:GridTextColumn HeaderText="Delivery Request Date" MappingName="ProductDeliveryRequestDate" />
+                    <syncfusion:GridTemplateColumn MappingName="" AllowEditing="False" AllowFiltering="False">
+                        <syncfusion:GridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{DynamicResource DeleteButton}"
+                                        Command="{Binding DataContext.DeleteProductCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding Id}"
+                                        Content="Delete"
+                                        syncfusion:FocusManagerHelper.FocusedElement="True" />
+                                    <Button Style="{DynamicResource AddButton}"
+                                        Command="{Binding DataContext.CopyProductCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                        CommandParameter="{Binding Id}"
+                                        Content="Delete"
+                                        syncfusion:FocusManagerHelper.FocusedElement="True" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </syncfusion:GridTemplateColumn.CellTemplate>
+                    </syncfusion:GridTemplateColumn>
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
             <controls:CatalogEditButtons HorizontalAlignment="Right" />
         </StackPanel>
 
         <syncfusion:SfDataGrid x:Name="recordGrid" ItemsSource="{Binding AllRecords}"
                                AllowFiltering="True" AutoGenerateColumns="False" ColumnSizer="Auto"
                                CellStyle="{StaticResource customCellStyle}"
-                               AlternatingRowStyle="{StaticResource alternatingRowStyle}" >
+                               AlternatingRowStyle="{StaticResource alternatingRowStyle}" AllowEditing="False" >
             <syncfusion:SfDataGrid.Columns>
-                <syncfusion:GridTextColumn HeaderText="Incoming Date" MappingName="IncomingDate" AllowEditing="False" />
-                <syncfusion:GridTextColumn HeaderText="Customer" MappingName="Customer.Name" AllowEditing="False" />
-                <syncfusion:GridTextColumn HeaderText="External Reference" MappingName="ExternalReference" AllowEditing="False" />
+                <syncfusion:GridTextColumn HeaderText="Customer" MappingName="Customer.Name" />
+                <syncfusion:GridTextColumn HeaderText="Order Date" MappingName="OrderDate" />
+                <syncfusion:GridTextColumn HeaderText="Order Delivery Request Date" MappingName="OrderDeliveryRequestDate" />
+                <syncfusion:GridTextColumn HeaderText="External Reference" MappingName="ExternalReference" />
             </syncfusion:SfDataGrid.Columns>
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">

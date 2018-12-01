@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
-    class Order : BasicModel
+    public class Order : BasicModel
     {
         private string _externalReference;
-        private DateTime _incomingDate;
+        private DateTime _orderDate;
+        private DateTime _orderDeliveryRequestDate;
+
         private Customer _customer;
 
         public string ExternalReference
@@ -29,15 +31,28 @@ namespace ProductionManager.Model
             }
         }
 
-        public DateTime IncomingDate
+        public DateTime OrderDate
         {
-            get => _incomingDate;
+            get => _orderDate;
             set
             {
-                if (value != _incomingDate)
+                if (value != _orderDate)
                 {
-                    _incomingDate = value;
-                    RaisePropertyChanged("IncomingDate");
+                    _orderDate = value;
+                    RaisePropertyChanged("OrderDate");
+                }
+            }
+        }
+
+        public DateTime OrderDeliveryRequestDate
+        {
+            get => _orderDeliveryRequestDate;
+            set
+            {
+                if (value != _orderDeliveryRequestDate)
+                {
+                    _orderDeliveryRequestDate = value;
+                    RaisePropertyChanged("OrderDeliveryRequestDate");
                 }
             }
         }
@@ -54,11 +69,26 @@ namespace ProductionManager.Model
             }
         }
 
+        // add foreign key
+        [BsonRef("OrderProduct")]
+        public List<OrderProduct> OrderProducts { get; } = new List<OrderProduct>();
+
+        public void AddProduct(OrderProduct product)
+        {
+            OrderProducts.Add(product);
+            RaisePropertyChanged("OrderProducts");
+        }
+        public void RemoveProduct(OrderProduct product)
+        {
+            OrderProducts.Remove(product);
+            RaisePropertyChanged("OrderProducts");
+        }
+
         public override bool IsValid()
         {
             return Customer != null
-                && IncomingDate != null
-                && IncomingDate > DateTime.MinValue
+                && OrderDate != null
+                && OrderDate > DateTime.MinValue
                     ;
         }
 
@@ -67,8 +97,12 @@ namespace ProductionManager.Model
             base.Reset();
 
             ExternalReference = string.Empty;
+            OrderDate = DateTime.Now;
+            OrderDeliveryRequestDate = DateTime.MaxValue;
+
             Customer = null;
-            IncomingDate = DateTime.Now;
+
+            OrderProducts.Clear();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ProductionManager.Model;
-using ProductionManager.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProductionManager.Specification
 {
-    class OrderSpecification : BasicSpecification<Order>
+    class OrderProductSpecification : BasicSpecification<OrderProduct>
     {
-        public OrderSpecification()
+        public OrderProductSpecification()
         {
-            AddInclude(x => x.Customer);
-            AddInclude(x => x.OrderProducts);
+            AddInclude(x => x.Product);
         }
     }
 }
