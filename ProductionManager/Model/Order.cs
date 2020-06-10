@@ -1,9 +1,6 @@
 ﻿using LiteDB;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
@@ -78,6 +75,7 @@ namespace ProductionManager.Model
             OrderProducts.Add(product);
             RaisePropertyChanged("OrderProducts");
         }
+
         public void RemoveProduct(OrderProduct product)
         {
             OrderProducts.Remove(product);

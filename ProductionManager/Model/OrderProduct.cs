@@ -1,9 +1,5 @@
 ﻿using LiteDB;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
@@ -14,7 +10,7 @@ namespace ProductionManager.Model
         private DateTime _productDeliveryRequestDate;
 
         private Product _product;
-        
+
         public int Quantity
         {
             get
@@ -90,7 +86,7 @@ namespace ProductionManager.Model
         public override void Reset()
         {
             base.Reset();
-            
+
             Product = null;
 
             Quantity = 0;

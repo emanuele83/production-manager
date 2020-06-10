@@ -111,7 +111,7 @@ namespace ProductionManager.ViewModel
             RefreshData();
             ShowMode = true;
         }
-        public virtual void PopulateForm(T model)
+        public virtual void SetCurrentRecord(T model)
         {
             CurrentRecord = model;
         }
@@ -189,12 +189,12 @@ namespace ProductionManager.ViewModel
                         p => true);
             }
         }
-        public ICommand PopulateFormCommand
+        public ICommand SetCurrentRecordCommand
         {
             get
             {
                 return new RelayCommand(
-                        p => PopulateForm((T)p),
+                        p => SetCurrentRecord((T)p),
                         p => true);
             }
         }

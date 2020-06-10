@@ -1,9 +1,4 @@
 ﻿using LiteDB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
@@ -42,7 +37,7 @@ namespace ProductionManager.Model
 
         public override bool IsValid()
         {
-            return  !string.IsNullOrEmpty(Name.Trim())
+            return !string.IsNullOrEmpty(Name.Trim())
                     && Category != null
                     ;
         }

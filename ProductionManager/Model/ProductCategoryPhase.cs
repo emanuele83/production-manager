@@ -1,9 +1,4 @@
 ﻿using LiteDB;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductionManager.Model
 {
@@ -90,7 +85,7 @@ namespace ProductionManager.Model
 
         public override bool IsValid()
         {
-            return  Category != null
+            return Category != null
                     && Phase != null
                     ;
         }
@@ -98,7 +93,7 @@ namespace ProductionManager.Model
         public override void Reset()
         {
             base.Reset();
-            
+
             Category = null;
             Phase = null;
 
